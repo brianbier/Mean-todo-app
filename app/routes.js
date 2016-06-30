@@ -12,6 +12,7 @@ module.exports = function(app){
           });
       }else{
         res.json(todos);
+        // res.send('No data')
       }
     })
   });
@@ -70,4 +71,11 @@ module.exports = function(app){
       }
     });
   });
+
+  //Front End Routes for angular js
+  app.get('*',function(req,res){
+    res.sendfile('./public/index.html');
+  });
+
+
 }; // end of module export
