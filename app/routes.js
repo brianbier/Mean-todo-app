@@ -6,12 +6,10 @@ module.exports = function(app){
     // use mongoose to get all todos in the database
     Todo.find({}).sort({createdAt: 'desc'}).exec(function(error,todos){
       if(error){
-        res.send(500,
-          {error: error,
-           succes: false
-          });
+        res.send(error);
       }else{
         res.json(todos);
+        // res.send('No data')
       }
     })
   });
@@ -26,18 +24,12 @@ module.exports = function(app){
 
     todo.save(function(error, todo){
       if(error){
-        res.send(500,{
-          error: error,
-          success: false
-        });
+        res.send(error);
       }else{
         // get and return all the todos after you create another
         Todo.find({}).sort({createdAt: 'desc'}).exec(function(error,todos){
           if(error){
-            res.send(500,{
-              error: error,
-              success: false
-            });
+            res.send(error);
           }else{
             res.json(todos);
           }
@@ -52,22 +44,21 @@ module.exports = function(app){
       _id: req.params.todo_id
     },function(error,todo){
       if(error){
-        res.send(500,{
-          error: error,
-          success:false
-        });
+        res.send(error);
       }else{
        Todo.find({}).sort({createdAt: 'desc'}).exec(function(error,todos){
         if(error){
-          res.send(500,{
-            error: error,
-            success: false
-          });
+          res.send(error);
         }else{
           res.json(todos);
         }
       });
       }
     });
+  });
+
+  //Front End Routes for angular js
+  app.get('*',function(req,res){
+    res.sendfile('./public/index.html');
   });
 }; // end of module export
