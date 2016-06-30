@@ -8,3 +8,7 @@
   - Node JS
   - Express
   - Mongoose
+
+![App][logo]
+
+[logo]: public/img/image.png "App"
